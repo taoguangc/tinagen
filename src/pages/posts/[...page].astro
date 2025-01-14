@@ -1,4 +1,5 @@
 ---
+// 导入必要的类型和组件
 import type { GetStaticPathsOptions, Page } from 'astro';
 import { type CollectionEntry, getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
@@ -8,13 +9,22 @@ import Subscribe from '../../components/Subscribe.astro';
 import siteConfig from '../../data/site-config';
 import { sortItemsByDateDesc } from '../../utils/data-utils';
 
+// 生成博客文章列表的静态路径
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-    const posts = (await getCollection('posts')).sort(sortItemsByDateDesc);
+    // 获取所有文章并按日期降序排序
+    const posts = (await getCollection('posts')).sort(sortItemsByDateDesc)
+    .map(post => ({
+        ...post,
+        slug: post.slug.replace(/\.(md|mdx)$/, '') // 移除文章URL中的文件扩展名
+    }));
+    // 根据配置的每页文章数进行分页
     return paginate(posts, { pageSize: siteConfig.postsPerPage || 4 });
 }
 
+// 定义页面组件的属性类型
 type Props = { page: Page<CollectionEntry<'posts'>> };
 
+// 获取当前页面的数据
 const { page } = Astro.props;
 const blog = page.data;
 ---
@@ -25,8 +35,15 @@ const blog = page.data;
     image={{ src: '/dante-preview.jpg', alt: 'The preview of the site' }}
     showHeader={false}
 >
+    <!-- 博客归档标题 -->
     <h1 class="mb-12 text-2xl leading-tight font-serif italic sm:mb-16 sm:text-4xl">Blog Archive</h1>
+    
+    <!-- 遍历并显示所有博客文章预览 -->
     {blog.map((post) => <PostPreview post={post} class="mb-10 sm:mb-12" />)}
+    
+    <!-- 分页导航组件 -->
     <Pagination page={page} class="my-16 sm:my-24" />
+    
+    <!-- 订阅组件 -->
     <Subscribe class="my-16 sm:my-24" />
 </BaseLayout>

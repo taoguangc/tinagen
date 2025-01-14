@@ -2,9 +2,9 @@
 title: About
 seo:
   title: About Me
-  description: Learn more about the person behind the website and embark on a journey of inspiration and shared experiences.
+  description: 了解网站背后的人，并踏上灵感和分享经验的旅程。
   image:
-    src: '/about.jpeg'
+    src: /uploads/about.jpeg
     alt: A person sitting at a desk in front of a computer
 ---
 
@@ -40,4 +40,4 @@ I believe in the power of collaboration and effective communication. Whether wor
 
 Are you looking to elevate your online presence or bring your digital ideas to life? I'd love to hear from you! Feel free to reach out for collaboration, consultation, or just a friendly chat about all things web development.
 
-_Let's build something amazing together!_
+*Let's build something amazing together!*
