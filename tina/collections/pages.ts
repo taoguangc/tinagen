@@ -55,28 +55,56 @@ const Pages: Collection = {
     },
     {
       type: 'rich-text' as const,
-      label: 'Body',
       name: 'body',
-      isBody: true,
+      label: 'Body',
+      isBody: true
+    },
+    {
+      type: 'object',
+      list: true,
+      name: 'blocks',
+      label: 'Sections',
       templates: [
         {
+          type: 'object',
           name: 'hero',
-          label: 'Hero Section',
+          label: 'Hero',
           fields: [
             {
               type: 'string',
-              name: 'heading',
-              label: 'Heading'
+              label: 'Headline',
+              name: 'headline'
             },
             {
               type: 'string',
-              name: 'subheading',
-              label: 'Subheading'
+              label: 'Sub Headline',
+              name: 'subHeadline'
             },
             {
-              type: 'image',
-              name: 'image',
-              label: 'Hero Image'
+              type: 'string',
+              label: 'Text',
+              name: 'text',
+              ui: {
+                component: 'textarea'
+              }
+            }
+          ]
+        },
+        {
+          type: 'object',
+          label: 'Feature',
+          name: 'feature',
+          list: true,
+          fields: [
+            {
+              type: 'string',
+              label: 'Title',
+              name: 'title'
+            },
+            {
+              type: 'string',
+              label: 'Text',
+              name: 'text'
             }
           ]
         }
