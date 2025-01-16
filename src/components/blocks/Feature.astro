@@ -1,0 +1,20 @@
+---
+interface Props {
+  items: {
+    title: string;
+    text: string;
+  }[];
+}
+
+const { items } = Astro.props;
+console.log('Feature props:', { items }); // 调试用
+---
+
+<section class="py-8 bg-white">
+  {items.map(item => (
+    <div class="mb-6">
+      {item.title && <h3 class="text-2xl font-bold mb-4">{item.title}</h3>}
+      {item.text && <p class="text-gray-700">{item.text}</p>}
+    </div>
+  ))}
+</section> 

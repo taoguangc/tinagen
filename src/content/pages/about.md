@@ -1,4 +1,15 @@
 ---
+sections:
+  - headline: Hero
+    subHeadline: Hero Sub
+    text: This is a hero block
+    _template: hero
+  - items:
+      - title: Feature 1
+        text: Feature 1 description
+      - title: Feature 2
+        text: Feature 2 description
+    _template: feature
 title: About
 seo:
   title: About Me
@@ -9,11 +20,13 @@ seo:
 blocks:
   - headline: Hero
     subHeadline: Hero Sub
-    text: >-
-      成吉思汗与黄金家族的血统之谜。红发碧眼，身材高大的他，是白人？汉人？还是蒙古人？/黄金家族的兴衰/蒙古人的先祖，阿兰老祖母口中神秘的金甲天神/回到草原的蒙古人，黄金家族最后的挣扎
+    text: This is a hero block.
     _template: hero
-  - title: 特色1
-    text: 昂贵的法国的发生
+  - items:
+      - title: Feature 1
+        text: Feature 1 description
+      - title: Feature 2
+        text: Feature 2 description
     _template: feature
 ---
 

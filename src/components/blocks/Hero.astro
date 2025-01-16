@@ -1,0 +1,16 @@
+---
+interface Props {
+  headline?: string;
+  subHeadline?: string;
+  text?: string;
+}
+
+const { headline, subHeadline, text } = Astro.props;
+console.log('Hero props:', { headline, subHeadline, text }); // 调试用
+---
+
+<section class="py-12 sm:py-16 bg-gray-50">
+  {headline && <h2 class="text-4xl font-bold mb-4">{headline}</h2>}
+  {subHeadline && <h3 class="text-2xl mb-4">{subHeadline}</h3>}
+  {text && <p class="text-lg">{text}</p>}
+</section> 
