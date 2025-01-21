@@ -1,14 +1,11 @@
-import type { Collection } from 'tinacms';
+import type { Collection } from 'tinacms'
 
 const Pages: Collection = {
   label: 'Pages',
   name: 'pages',
   path: 'src/content/pages',
   // format: 'mdx',
-  // defaultItem: () => ({
-  //     title: '新页面',
-  //     body: 'Start writing here...'
-  // }),
+
   fields: [
     {
       type: 'string',
@@ -63,10 +60,12 @@ const Pages: Collection = {
       type: 'object',
       list: true,
       name: 'blocks',
-      label: 'Sections',
+      label: 'Blocks',
+      ui: {
+        visualSelector: true
+      },
       templates: [
         {
-          type: 'object',
           name: 'hero',
           label: 'Hero',
           fields: [
@@ -109,6 +108,11 @@ const Pages: Collection = {
                   type: 'string',
                   label: 'Text',
                   name: 'text'
+                },
+                {
+                  type: 'image',
+                  label: 'Feature Image',
+                  name: 'fimage'
                 }
               ]
             }
@@ -117,6 +121,6 @@ const Pages: Collection = {
       ]
     }
   ]
-};
+}
 
-export default Pages;
+export default Pages

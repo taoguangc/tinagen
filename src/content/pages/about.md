@@ -15,7 +15,7 @@ seo:
   title: About Me
   description: 了解网站背后的人，并踏上灵感和分享经验的旅程。
   image:
-    src: /uploads/about.jpeg
+    src: /src/images/about.jpeg
     alt: A person sitting at a desk in front of a computer
 blocks:
   - headline: Hero
@@ -25,8 +25,10 @@ blocks:
   - items:
       - title: Feature 1
         text: Feature 1 description
+        fimage: /src/images/project-6.jpg
       - title: Feature 2
         text: Feature 2 description
+        fimage: /src/images/project-4.jpg
     _template: feature
 ---
 

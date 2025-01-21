@@ -16,28 +16,35 @@ export async function getStaticPaths() {
 }
 
 const { page } = Astro.props
-const { title, seo, sections = [] } = page.data
+const { title, seo, blocks = [] } = page.data
 const { Content } = await render(page)
 
-// 调试日志
-console.log('Page data:', page.data)
-console.log('Sections:', sections)
+// 增加详细的调试信息
+console.log('Page data:', {
+  title,
+  hasBlocks: blocks && blocks.length > 0,
+  blocksCount: blocks?.length,
+  blocks: JSON.stringify(blocks, null, 2)
+})
 ---
 
 <BaseLayout title={seo?.title ?? title} description={seo?.description} image={seo?.image} showHeader={false}>
   <article class='mb-16 sm:mb-24'>
-    {/* 渲染 sections */}
+    {/* 添加调试输出 */}
+    {blocks?.length === 0 && <div class='text-red-500'>未发现区块</div>}
+
+    {/* 渲染 blocks */}
     {
-      sections.map(section =>
-        section._template === 'hero' ? (
-          <Hero headline={section.headline} subHeadline={section.subHeadline} text={section.text} />
-        ) : section._template === 'feature' ? (
-          <Feature items={section.items} />
+      blocks?.map(block => {
+        console.log('Processing block:', block._template)
+        return block._template === 'hero' ? (
+          <Hero headline={block.headline} subHeadline={block.subHeadline} text={block.text} />
+        ) : block._template === 'feature' ? (
+          <Feature items={block.items} />
         ) : null
-      )
+      })
     }
 
-    {/* 其他内容保持不变 */}
     <header class='mb-8'>
       <h1 class='text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight'>{title}</h1>
     </header>

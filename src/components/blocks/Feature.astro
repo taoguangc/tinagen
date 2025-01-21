@@ -1,20 +1,37 @@
 ---
+import { Image } from 'astro:assets'
+
 interface Props {
   items: {
-    title: string;
-    text: string;
-  }[];
+    title: string
+    text: string
+    fimage?: string // 确保与 schema 定义匹配
+  }[]
 }
 
-const { items } = Astro.props;
-console.log('Feature props:', { items }); // 调试用
+const { items } = Astro.props
+const itemClass = items.length == 3 || items.length > 4 ? 'md:grid-cols-3' : items.length === 2 || items.length === 4 ? 'md:grid-cols-2' : 'md:grid-cols-1'
+
+// 添加更清晰的调试信息
+console.log('Feature props 详细信息:', {
+  itemsCount: items.length,
+  firstItem: items[0], // 显示第一个item的所有字段
+  allKeys: items.map(item => Object.keys(item)) // 显示所有item的字段名
+})
 ---
 
-<section class="py-8 bg-white">
-  {items.map(item => (
-    <div class="mb-6">
-      {item.title && <h3 class="text-2xl font-bold mb-4">{item.title}</h3>}
-      {item.text && <p class="text-gray-700">{item.text}</p>}
-    </div>
-  ))}
-</section> 
+<section class={`grid grid-col-1 ${itemClass} container mx-auto`}>
+  {
+    items.map(item => (
+      <div class='p-4 mb-6'>
+        {item.title && <h3 class='text-2xl font-bold mb-4'>{item.title}</h3>}
+        {item.text && <p class='text-gray-700'>{item.text}</p>}
+        {item.fimage && (
+          <div class='mt-4'>
+            <Image width={600} height={400} src={item.fimage} alt={item.title} layout='responsive' class='max-w-full h-auto rounded-lg shadow-md' />
+          </div>
+        )}
+      </div>
+    ))
+  }
+</section>
