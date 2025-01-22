@@ -2,6 +2,7 @@
 import interWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
 import newsreaderWoff2 from '@fontsource-variable/newsreader/files/newsreader-latin-wght-normal.woff2?url';
 import siteConfig from '../data/site-config';
+import { getImage } from '../utils/image';
 import '../styles/global.css';
 
 export type Props = {
@@ -13,12 +14,16 @@ export type Props = {
 
 const { description = '', image = siteConfig.image, pageType = 'website' } = Astro.props;
 const title = [Astro.props.title, siteConfig.title].filter(Boolean).join(' | ');
-const resolvedImage = image?.src
+
+// 处理 SEO 图片
+const processedImage = image?.src ? await getImage(image.src) : undefined;
+const resolvedImage = processedImage
     ? {
-          src: new URL(image.src, Astro.site).toString(),
+          src: new URL(processedImage.src, Astro.site).toString(),
           alt: image.alt
       }
     : undefined;
+
 const canonicalURL = new URL(Astro.request.url, Astro.site);
 
 /**
