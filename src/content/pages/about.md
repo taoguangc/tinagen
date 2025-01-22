@@ -1,6 +1,6 @@
 ---
 title: About
-mainImage: /src/images/4.jpg
+mainImage: /src/images/post-3.jpg
 seo:
   title: About Me
   description: 了解网站背后的人，并踏上灵感和分享经验的旅程。
@@ -30,4 +30,4 @@ blocks:
 
 **Greetings!** I'm Ethan Donovan, a passionate web developer residing in the picturesque landscapes of [Estonia](https://en.wikipedia.org/wiki/Estonia). With a keen eye for design and a love for crafting seamless digital experiences, I bring a unique blend of creativity and technical expertise to the world of web development.
 
-_Let's build something amazing together!_
+*Let's build something amazing together!*
