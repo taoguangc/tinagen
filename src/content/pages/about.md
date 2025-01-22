@@ -32,7 +32,7 @@ blocks:
     _template: feature
 ---
 
-![Alt text for image](/about.jpeg)
+![Alt text for image](/src/images/about.jpeg)
 
 **Note!:** This about page is entirely fictional and created for the purpose of showcasing [Dante Astro.js theme functionality](https://justgoodui.com/astro-themes/dante/).
 
