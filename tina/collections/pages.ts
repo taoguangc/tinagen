@@ -15,6 +15,11 @@ const Pages: Collection = {
       required: true
     },
     {
+      type: 'image',
+      name: 'mainImage',
+      label: 'Main Image'
+    },
+    {
       type: 'object',
       name: 'seo',
       label: 'SEO Settings',

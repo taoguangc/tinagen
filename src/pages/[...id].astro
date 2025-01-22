@@ -3,6 +3,8 @@ import { type CollectionEntry, getCollection, render } from 'astro:content'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import Hero from '../components/blocks/Hero.astro'
 import Feature from '../components/blocks/Feature.astro'
+import { Image } from 'astro:assets'
+import * as imageUtils from '../utils/image'
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages')
@@ -16,38 +18,52 @@ export async function getStaticPaths() {
 }
 
 const { page } = Astro.props
-const { title, seo, blocks = [] } = page.data
+const { title, mainImage, seo, blocks = [] } = page.data
 const { Content } = await render(page)
 
-// 增加详细的调试信息
+// 处理主图
+const resolvedMainImage = mainImage ? await imageUtils.getImage(mainImage) : null
+
+// 调试信息
 console.log('Page data:', {
   title,
+  mainImage,
   hasBlocks: blocks && blocks.length > 0,
-  blocksCount: blocks?.length,
-  blocks: JSON.stringify(blocks, null, 2)
+  blocksCount: blocks?.length
 })
 ---
 
 <BaseLayout title={seo?.title ?? title} description={seo?.description} image={seo?.image} showHeader={false}>
   <article class='mb-16 sm:mb-24'>
-    {/* 添加调试输出 */}
-    {blocks?.length === 0 && <div class='text-red-500'>未发现区块</div>}
-
-    {/* 渲染 blocks */}
-    {
-      blocks?.map(block => {
-        console.log('Processing block:', block._template)
-        return block._template === 'hero' ? (
-          <Hero headline={block.headline} subHeadline={block.subHeadline} text={block.text} />
-        ) : block._template === 'feature' ? (
-          <Feature items={block.items} />
-        ) : null
-      })
-    }
-
     <header class='mb-8'>
       <h1 class='text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight'>{title}</h1>
     </header>
+
+    {/* 显示主图 */}
+    {resolvedMainImage && (
+      <div class='container mx-auto mb-8'>
+        <Image 
+          src={resolvedMainImage} 
+          alt={title}
+          width={1200}
+          height={600}
+          class="rounded-lg shadow-lg w-full"
+          quality={80}
+          format="webp"
+        />
+      </div>
+    )}
+
+    {/* 渲染 blocks */}
+    {blocks?.map(block => {
+      console.log('Processing block:', block._template)
+      return block._template === 'hero' ? (
+        <Hero headline={block.headline} subHeadline={block.subHeadline} text={block.text} />
+      ) : block._template === 'feature' ? (
+        <Feature items={block.items} />
+      ) : null
+    })}
+
     <div class='max-w-none prose prose-dante sm:prose-lg'>
       <Content />
     </div>

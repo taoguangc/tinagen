@@ -7,23 +7,23 @@ blocks:
   - items:
       - title: f1
         text: f1 description
-        fimage: ../../images/project-4.jpg
+        fimage: /src/images/project-4.jpg
       - title: f2
         text: f2 description
-        fimage: ../../images/project-3.jpg
+        fimage: /src/images/project-3.jpg
       - title: f3
         text: f3 description
-        fimage: ../../images/project-5.jpg
+        fimage: /src/images/project-5.jpg
       - title: f4
         text: f4 desc
-        fimage: ../../images/project-7.jpg
+        fimage: /src/images/project-7.jpg
     _template: feature
 ---
 
 Thank you for reaching out! Whether you have a question, a suggestion, or just want to share your thoughts, I'm all ears. Feel free to get in touch through any of the methods below:
 
-*Email:*
+_Email:_
 Feel free to drop me an email at [example@example.com](mailto:example@example.com), and I'll do my best to respond as soon as possible.
 
-*Social Media:*
+_Social Media:_
 Connect with me on social media as well. Find me on [Twitter](https://twitter.com) or [LinkedIn](https://www.linkedin.com/).

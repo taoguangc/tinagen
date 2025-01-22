@@ -9,13 +9,13 @@ blocks:
   - items:
       - title: f1
         text: 'f1 dsafdsaf '
-        fimage: ../../images/project-5.jpg
+        fimage: /src/images/project-5.jpg
       - title: f2
         text: f2 desc
-        fimage: ../../images/project-2.jpg
+        fimage: /src/images/project-2.jpg
       - title: f3
         text: f3 desc
-        fimage: ../../images/project-3.jpg
+        fimage: /src/images/project-3.jpg
     _template: feature
 ---
 
@@ -63,4 +63,4 @@ To the fullest extent permitted by law, we shall not be liable for any direct, i
 
 These Terms are governed by and construed in accordance with the laws of \[Your Jurisdiction], without regard to its conflict of laws principles. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the courts of \[Your Jurisdiction].
 
-*Thank you for reading our Terms of Service. By using the Website, you agree to be bound by these Terms.*
+_Thank you for reading our Terms of Service. By using the Website, you agree to be bound by these Terms._
