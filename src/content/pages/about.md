@@ -25,7 +25,7 @@ blocks:
   - items:
       - title: Feature 1
         text: Feature 1 description
-        fimage: /src/images/project-6.jpg
+        fimage: /src/images/project-5.jpg
       - title: Feature 2
         text: Feature 2 description
         fimage: /src/images/project-4.jpg
