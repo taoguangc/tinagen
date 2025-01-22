@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       '@astrojs/mdx':
-        specifier: ^4.0.7
+        specifier: ^4.0.6
         version: 4.0.7(astro@5.1.8(@types/node@22.10.7)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.3)(yaml@2.7.0))
       '@astrojs/rss':
         specifier: ^4.0.11
@@ -18,7 +18,7 @@ importers:
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/tailwind':
-        specifier: ^5.1.5
+        specifier: ^5.1.4
         version: 5.1.5(astro@5.1.8(@types/node@22.10.7)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.3)(yaml@2.7.0))(tailwindcss@3.4.17)
       '@fontsource-variable/inter':
         specifier: ^5.1.1
@@ -27,11 +27,14 @@ importers:
         specifier: ^5.1.1
         version: 5.1.1
       astro:
-        specifier: ^5.1.8
+        specifier: ^5.1.7
         version: 5.1.8(@types/node@22.10.7)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.3)(yaml@2.7.0)
       marked:
         specifier: ^15.0.6
         version: 15.0.6
+      sharp:
+        specifier: ^0.33.5
+        version: 0.33.5
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.17
@@ -9570,7 +9573,6 @@ snapshots:
     dependencies:
       color-convert: 2.0.1
       color-string: 1.9.1
-    optional: true
 
   comma-separated-tokens@2.0.3: {}
 
@@ -12966,7 +12968,6 @@ snapshots:
       '@img/sharp-wasm32': 0.33.5
       '@img/sharp-win32-ia32': 0.33.5
       '@img/sharp-win32-x64': 0.33.5
-    optional: true
 
   shebang-command@2.0.0:
     dependencies:
