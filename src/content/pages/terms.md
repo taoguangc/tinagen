@@ -9,13 +9,13 @@ blocks:
   - items:
       - title: f1
         text: 'f1 dsafdsaf '
-        fimage: /src/images/project-5.jpg
+        fimage: ../../images/project-5.jpg
       - title: f2
         text: f2 desc
-        fimage: /src/images/project-2.jpg
+        fimage: ../../images/project-2.jpg
       - title: f3
         text: f3 desc
-        fimage: /src/images/project-3.jpg
+        fimage: ../../images/project-3.jpg
     _template: feature
 ---
 

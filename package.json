@@ -1,12 +1,12 @@
 {
   "name": "tinagen",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "scripts": {
     "dev": "tinacms dev -c \"astro dev\"",
     "start": "astro dev",
     "prebuild": "node src/utils/replaceAssetPaths.js",
-    "build": "tinacms build --local -c \"astro build\"",
+    "build": "prebuild && tinacms build --local -c \"astro build\"",
     "preview": "astro preview",
     "astro": "astro"
   },

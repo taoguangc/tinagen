@@ -7,16 +7,16 @@ blocks:
   - items:
       - title: f1
         text: f1 description
-        fimage: /src/images/project-4.jpg
+        fimage: ../../images/project-4.jpg
       - title: f2
         text: f2 description
-        fimage: /src/images/project-3.jpg
+        fimage: ../../images/project-3.jpg
       - title: f3
         text: f3 description
-        fimage: /src/images/project-5.jpg
+        fimage: ../../images/project-5.jpg
       - title: f4
         text: f4 desc
-        fimage: /src/images/project-7.jpg
+        fimage: ../../images/project-7.jpg
     _template: feature
 ---
 

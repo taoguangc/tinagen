@@ -1,31 +1,62 @@
-// all .md files in this directory will be processed
-// specify from the root of your project
-const postsDirectory = '/src/content/'
+import { readdir, readFile, writeFile } from 'fs/promises'
+import { join, resolve } from 'path'
 
-// Find and replace strings
-const find = '/src/images/'
-let replace = '../../images/' // update this path based on where files are located
+const contentDir = resolve('./src/content')
+const searchPattern = /\/src\/images\//g
+const replacement = '../../images/'
 
-replace = replace.replaceAll('.', '\\.')
-// Special characters (https://en.wikipedia.org/wiki/Regular_expression#POSIX_basic_and_extended) need to be escaped
-
-import { exec } from 'child_process'
-// execute bash command
-exec(
-  `find ${process.cwd()}${postsDirectory} -type f -name '*.md' -print0 | xargs -0 sed -i -e 's:${find}:${replace}:g'`,
-  // GNU sed that runs on Linux but not on mac
-  (error, stdout, stderr) => {
-    // error handling
-    if (error) {
-      console.log(`error: ${error.message}`)
-      return
+async function* walkDirectory(dir) {
+  const dirEntries = await readdir(dir, { withFileTypes: true })
+  for (const entry of dirEntries) {
+    const entryPath = join(dir, entry.name)
+    if (entry.isDirectory()) {
+      yield* walkDirectory(entryPath)
+    } else if (entry.name.endsWith('.md')) {
+      yield entryPath
     }
-    if (stderr) {
-      console.log(`stderr: ${stderr}`)
-      return
-    }
-    // success
-    console.log(stdout)
-    console.log('🖼️ Successfully replaced asset paths')
   }
-)
+}
+
+async function processFile(filePath) {
+  try {
+    const content = await readFile(filePath, 'utf-8')
+    if (content.match(searchPattern)) {
+      const newContent = content.replace(searchPattern, replacement)
+      await writeFile(filePath, newContent, 'utf-8')
+      console.log(`✅ 已处理: ${filePath}`)
+      return true
+    }
+    return false
+  } catch (error) {
+    console.error(`❌ 处理文件失败 ${filePath}:`, error.message)
+    return false
+  }
+}
+
+async function main() {
+  console.log('🔍 开始处理 Markdown 文件...')
+  let processedCount = 0
+  let errorCount = 0
+
+  try {
+    for await (const file of walkDirectory(contentDir)) {
+      const success = await processFile(file)
+      if (success) {
+        processedCount++
+      } else {
+        errorCount++
+      }
+    }
+
+    console.log('\n📝 处理结果汇总:')
+    console.log(`- 成功处理文件数: ${processedCount}`)
+    if (errorCount > 0) {
+      console.log(`- 处理失败文件数: ${errorCount}`)
+    }
+  } catch (error) {
+    console.error('💥 发生错误:', error.message)
+    process.exit(1)
+  }
+}
+
+main().catch(console.error)
