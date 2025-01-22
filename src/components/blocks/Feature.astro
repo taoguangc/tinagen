@@ -1,6 +1,6 @@
 ---
-import type { ImageMetadata } from 'astro'
 import { Image } from 'astro:assets'
+import { getImage } from '../../utils/image'
 
 interface Props {
   items: {
@@ -13,8 +13,13 @@ interface Props {
 const { items } = Astro.props
 const itemClass = items.length == 3 || items.length > 4 ? 'md:grid-cols-3' : items.length === 2 || items.length === 4 ? 'md:grid-cols-2' : 'md:grid-cols-1'
 
-// 使用 import.meta.glob 动态导入图片
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/images/**/*.{jpeg,jpg,png,gif,webp,avif}')
+// 预处理所有图片
+const processedItems = await Promise.all(
+  items.map(async item => ({
+    ...item,
+    processedImage: item.fimage ? await getImage(item.fimage) : null
+  }))
+)
 
 // 调试信息
 console.log('Feature props:', {
@@ -26,25 +31,21 @@ console.log('Feature props:', {
 
 <section class={`grid grid-col-1 ${itemClass} container mx-auto`}>
   {
-    items.map(item => (
+    processedItems.map(item => (
       <div class='p-4 mb-6'>
         {item.title && <h3 class='text-2xl font-bold mb-4'>{item.title}</h3>}
         {item.text && <p class='text-gray-700'>{item.text}</p>}
-        {item.fimage && (
+        {item.processedImage && (
           <div class='mt-4'>
-            {images[item.fimage] ? (
-              <Image 
-                src={images[item.fimage]()}
-                alt={item.title || 'Feature image'}
-                width={600}
-                height={400}
-                quality={80}
-                format="webp"
-                class="max-w-full h-auto rounded-lg shadow-md"
-              />
-            ) : (
-              <p class="text-red-500">Image not found: {item.fimage}</p>
-            )}
+            <Image 
+              src={item.processedImage}
+              alt={item.title || 'Feature image'}
+              width={600}
+              height={400}
+              quality={80}
+              format="webp"
+              class="max-w-full h-auto rounded-lg shadow-md"
+            />
           </div>
         )}
       </div>
